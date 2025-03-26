@@ -1,6 +1,6 @@
 # Bagaan
 
-[![Deployment Status](https://vercel.com/your-username/bagaan/deployments)](https://bagaan.vercel.app/)
+[![Deployment Status](https://vercel.com/akakak0796-gmailcoms-projects/bagaan/deployments)](https://bagaan.vercel.app/)
 
 ## Problem Statement
 
