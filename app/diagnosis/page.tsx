@@ -12,27 +12,7 @@ import Preloader from "@/components/preloader"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-// interface DiagnosisResult {
-//   diagnosis: {
-//     disease: string
-//     confidence: number
-//     symptoms: string[]
-//     image_analysis: {
-//       observed_symptoms: string[]
-//     }
-//   }
-//   recommendations: {
-//     preventive_measures: string[]
-//     treatment: {
-//       type: string
-//       active_ingredients?: string[]
-//       application_instructions?: string
-//       organic_options?: string[]
-//       notes?: string
-//       instructions?: string[]
-//     }[]
-//   }
-// }
+
 
 export default function DiagnosisPage() {
   const [file, setFile] = useState<File | null>(null)
@@ -58,54 +38,107 @@ export default function DiagnosisPage() {
     setResult(null)
   }
 
-  const handleAnalyze = async () => {
+  // const handleAnalyze = async () => { //old
+  //   setIsAnalyzing(true);
+  //   if (!file) {
+  //     console.error("No file selected");
+  //     return;
+  //   }
+  
+  
+  //   try {
+  //     // Convert the image file to Base64
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+      
+  //     reader.onloadend = async () => {
+  //       const base64Image = reader.result?.toString().split(",")[1]; // Remove "data:image/png;base64," part
+  
+  //       if (!base64Image) {
+  //         console.error("Failed to convert image to Base64");
+  //         setIsAnalyzing(false);
+  //         return;
+  //       }
+  
+  //       const response = await fetch("https://plant-doctor-ai.onrender.com/ai", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({ image: base64Image }), // Send Base64 string
+  //       });
+  
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! Status: ${response.status}`);
+  //       }
+  
+  //       let data = await response.json();
+  
+  //       // Clean up JSON response if necessary
+  //       const cleanedText = JSON.parse(data.replace(/```json|```/g, "").trim());
+  
+  //       console.log(cleanedText);
+  //       setResult(cleanedText);
+  //     };
+  //   } catch (error) {
+  //     console.error("Error analyzing image:", error);
+  //   } finally {
+  //     setIsAnalyzing(false);
+  //   }
+  // };
+
+  const handleAnalyze = async () => { //new
+    setIsAnalyzing(true);
     if (!file) {
       console.error("No file selected");
       return;
     }
   
-    setIsAnalyzing(true);
-  
     try {
-      // Convert the image file to Base64
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      
+  
       reader.onloadend = async () => {
-        const base64Image = reader.result?.toString().split(",")[1]; // Remove "data:image/png;base64," part
+        try {
+          const base64Image = reader.result?.toString().split(",")[1]; // Remove "data:image/png;base64," part
   
-        if (!base64Image) {
-          console.error("Failed to convert image to Base64");
-          setIsAnalyzing(false);
-          return;
+          if (!base64Image) {
+            console.error("Failed to convert image to Base64");
+            setIsAnalyzing(false); // Ensure loading state resets if conversion fails
+            return;
+          }
+  
+          const response = await fetch("https://plant-doctor-ai.onrender.com/ai", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ image: base64Image }), // Send Base64 string
+          });
+  
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+  
+          let data = await response.json();
+  
+          // Clean up JSON response if necessary
+          const cleanedText = JSON.parse(data.replace(/```json|```/g, "").trim());
+  
+          console.log(cleanedText);
+          setResult(cleanedText);
+        } catch (error) {
+          console.error("Error analyzing image:", error);
+        } finally {
+          setIsAnalyzing(false); // Ensure loading state resets after the analysis is done
         }
-  
-        const response = await fetch("https://plant-doctor-ai.onrender.com/ai", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ image: base64Image }), // Send Base64 string
-        });
-  
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-  
-        let data = await response.json();
-  
-        // Clean up JSON response if necessary
-        const cleanedText = JSON.parse(data.replace(/```json|```/g, "").trim());
-  
-        console.log(cleanedText);
-        setResult(cleanedText);
       };
     } catch (error) {
-      console.error("Error analyzing image:", error);
-    } finally {
-      setIsAnalyzing(false);
+      console.error("Error initializing FileReader:", error);
+      setIsAnalyzing(false); // Reset in case of FileReader failure
     }
   };
+  
   
       const resetAnalysis = () => {
         setFile(null)
