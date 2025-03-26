@@ -92,7 +92,7 @@ export default function ClimateAlertsPage() {
       setWeatherData(data)
     } catch (err) {
       console.error("Error fetching weather data:", err)
-      setError("Failed to fetch weather data. Please try again.")
+      // setError("Failed to fetch weather data. Please try again.")
     } finally {
       setIsLoading(false)
     }
