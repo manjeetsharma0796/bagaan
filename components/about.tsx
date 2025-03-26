@@ -13,7 +13,7 @@ export default function About() {
         transition={{ duration: 0.5 }}
         className="text-center mb-12"
       >
-        <h2 className="text-3xl font-bold mb-4">How FarmAI Helps You</h2>
+        <h2 className="text-3xl font-bold mb-4">How Bagaan Helps You</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Our AI-powered platform provides farmers with tools to detect diseases early, prepare for weather changes, and
           make data-driven decisions.

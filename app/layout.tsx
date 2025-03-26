@@ -8,7 +8,7 @@ import { ThemeProvider } from "@/context/theme-context"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "FarmAI - AI-Powered Crop Health & Climate Insights",
+  title: "Bagaan - AI-Powered Crop Health & Climate Insights",
   description: "Empowering farmers with AI-powered crop health diagnostics and climate insights",
     generator: 'v0.dev'
 }

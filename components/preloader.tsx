@@ -49,7 +49,7 @@ export default function Preloader() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
             >
-              FarmAI
+              Bagaan
             </motion.h2>
             <motion.div
               className="mt-4 h-1 w-48 overflow-hidden rounded-full bg-muted"

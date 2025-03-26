@@ -41,7 +41,7 @@ export default function Problems() {
       >
         <h2 className="text-3xl font-bold mb-4">Problems We Solve</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          FarmAI addresses key challenges faced by farmers with technology-driven solutions
+          Bagaan addresses key challenges faced by farmers with technology-driven solutions
         </p>
       </motion.div>
 

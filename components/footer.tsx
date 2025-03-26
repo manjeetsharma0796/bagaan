@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Leaf className="h-6 w-6 text-primary" />
-              <span className="font-bold text-xl">FarmAI</span>
+              <span className="font-bold text-xl">Bagaan</span>
             </Link>
             <p className="text-muted-foreground max-w-md">
               Empowering farmers with AI-powered crop health diagnostics and climate insights to maximize yield and
@@ -89,7 +89,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t mt-12 pt-6 text-center text-muted-foreground">
-          <p>© {new Date().getFullYear()} FarmAI. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Bagaan. All rights reserved.</p>
         </div>
       </div>
     </footer>
